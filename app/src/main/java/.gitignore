@@ -1,0 +1,16 @@
+# Ignore .idea (Android Studio settings)
+.idea/
+
+# Ignore build and gradle
+*.iml
+/build/
+.gradle/
+local.properties
+
+# Ignore generated files
+.DS_Store
+*.log
+
+# Ignore Keystore (nếu có)
+*.jks
+

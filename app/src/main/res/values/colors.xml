@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="button_color">#FF55847A</color>
+    <color name="linked_text_color">#F755847A</color>
+    <color name="dairy_task_title">#78000000</color>
+    <color name="primary_color">#FFEDEDED</color>
+    <color name="edt_font_color">#BD000000</color>
+</resources>

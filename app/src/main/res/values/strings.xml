@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Taskit</string>
+    <string name="title_start">Get things done with Taskit</string>
+    <string name="body_start">....</string>
+    <string name="get_started">Get Started</string>
+
+    <string name="edt_full_name">Enter your Full Name</string>
+    <string name="edt_email">Enter your Email Address</string>
+    <string name="edt_password">Enter your Password</string>
+    <string name="edt_confirm_password">Confirm your Password</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="btn_sign_in">Sign In</string>
+    <string name="btn_add_to_list">Add to list</string>
+
+    <string name="have_an_account">Already have an account ? </string>
+    <string name="not_have_an_account">Don\'t have an account?</string>"
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="linked_to_sign_in">Sign In</string>
+    <string name="linked_to_sign_up">Sign Up</string>
+
+    <string name="title_sign_in">Welcome Back!</string>
+    <string name="dairy_task">Dairy Tasks</string>
+    <string name="todos_task">Todos Tasks</string>
+    <string name="title_onboard">Welcome Onboard!</string>
+    <string name="title_dashboard">Welcome Dashboard!</string>
+    <string name="header_sign_up">Let\'s help you meet up your task</string>
+    <string name="header_add_todo">Add What your want to do later on..</string>
+    <string name="non_description">null</string>
+
+</resources>
