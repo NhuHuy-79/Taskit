@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "297173901787",
+    "project_id": "taskit-app-78538",
+    "storage_bucket": "taskit-app-78538.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297173901787:android:ac200cbc9a81dd20b007fe",
+        "android_client_info": {
+          "package_name": "badang.android.taskit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL79GLZrJEKxlUhIZdCQ4oqdtDa__kMjg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

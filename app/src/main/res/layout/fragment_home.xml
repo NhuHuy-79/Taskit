@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="43dp"
-        android:text="@string/title_start"
+        android:text="@string/home_start"
         style="@style/TitleStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -33,7 +33,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_get_started"
-        android:text="@string/get_started"
+        android:text="@string/home_btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/ButtonStyle"

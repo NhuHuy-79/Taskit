@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="badang.android.taskit" />
+                  <option name="mobileSdkAppId" value="1:297173901787:android:ac200cbc9a81dd20b007fe" />
+                  <option name="projectId" value="taskit-app-78538" />
+                  <option name="projectNumber" value="297173901787" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/shape_bottom_sheet"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="10dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_remove"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/txv_dialog_edit"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/modal_edit"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_modal_edit" />
+
+    <TextView
+        android:id="@+id/txv_dialog_check"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/modal_complete_task"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_modal_check" />
+
+    <TextView
+        android:id="@+id/txv_dialog_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/modal_set_alarm"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_modal_alarm" />
+
+    <TextView
+        android:id="@+id/txv_dialog_delete"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/modal_delete_task"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_modal_delete" />
+
+
+    <TextView
+        android:id="@+id/txv_dialog_delete_all"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/modal_delete_all"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_modal_delete_all" />
+
+
+
+</LinearLayout>

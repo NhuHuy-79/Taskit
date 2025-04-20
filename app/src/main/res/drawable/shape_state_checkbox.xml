@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_task_box"
+        android:state_checked="true"
+        android:state_enabled="false" />
+
+    <!-- Checked and enabled state -->
+    <item android:drawable="@drawable/ic_task_box"
+        android:state_checked="true"
+        android:state_enabled="true" />
+
+    <!-- Unchecked state -->
+    <item android:drawable="@drawable/ic_circle_box"/>
+</selector>

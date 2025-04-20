@@ -2,7 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 
-    id("com.google.devtools.ksp") version "2.0.21-1.0.25"
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp") version "1.9.0-1.0.13"
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -38,7 +41,12 @@ android {
 
     buildFeatures {
         viewBinding = true
+
     }
+
+    /*composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.0"
+    }*/
 }
 
 dependencies {
@@ -47,20 +55,41 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:2.8.0")
     implementation("androidx.navigation:navigation-ui:2.8.0")
 
-    /*Custom Number picker from Shawlin03*/
-    implementation ("io.github.ShawnLin013:number-picker:2.4.13")
 
     /*Room-Database*/
     implementation("androidx.room:room-runtime:2.6.0")
     ksp("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
 
-    
+    /*Splash Screen*/
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
+    //Lifecycle
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+
     /*Hilt-Dagger*/
     implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
     ksp("com.google.dagger:hilt-android-compiler:2.51.1")
+
     /*Firebase*/
 
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:32.3.0"))
+
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+
+    // Add the dependency for the Firebase SDK for Google Analytics
+    implementation("com.google.firebase:firebase-analytics")
+
+    // TODO: Add the dependencies for any other Firebase products you want to use
+    // See https://firebase.google.com/docs/android/setup#available-libraries
+    // For example, add the dependencies for Firebase Authentication and Cloud Firestore
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+
+    //Kotlin coroutine ktx for Firebase
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.9.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
