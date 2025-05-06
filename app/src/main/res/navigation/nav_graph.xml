@@ -24,26 +24,21 @@
             app:popExitAnim="@anim/slide_out_down_horizon"
             app:destination="@id/bottomSheetFragment"
             >
-            <argument
-                android:name="isChecked"
-                app:argType= "boolean"
-                android:defaultValue="false"
-                />
-
-            <argument
-                android:name="isAlarmed"
-                app:argType="boolean"
-                android:defaultValue="false"/>
-
-            <argument
-                android:name="taskId"
-                app:argType="string"
-                android:defaultValue=""
-                />
         </action>
         <action
             android:id="@+id/action_dashBoardFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_to_left"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popExitAnim="@anim/slide_out_to_right"
+            app:popEnterAnim="@anim/slide_in_to_right"
+            />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_optionFragment"
+            app:destination="@id/optionFragment"
+            app:enterAnim="@anim/slide_in_up_horizon"
+            app:popExitAnim="@anim/slide_out_down_horizon"
+            />
     </fragment>
     <fragment
         android:id="@+id/upsertFragment"
@@ -71,10 +66,66 @@
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_to_left"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popExitAnim="@anim/slide_out_to_right"
+            app:popEnterAnim="@anim/slide_in_to_right"
+            />
+        <action
+            android:id="@+id/action_signInFragment_to_sendEmailSheet"
+            app:destination="@id/sendEmailSheet"
+            app:enterAnim="@anim/slide_in_up_horizon"
+            app:popExitAnim="@anim/slide_out_down_horizon"
+            />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="badang.android.taskit.feature_auth.presentation.fragment.SignUpFragment"
         android:label="SignUpFragment" />
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="badang.android.taskit.feature_auth.presentation.fragment.ResetPasswordFragment"
+        android:label="ResetPasswordFragment" />
+    <dialog
+        android:id="@+id/sendEmailSheet"
+        android:name="badang.android.taskit.feature_auth.presentation.fragment.SendEmailSheet"
+        android:label="SendEmailSheet" >
+        <action
+            android:id="@+id/action_sendEmailSheet_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment"
+            app:enterAnim="@anim/slide_in_to_left"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popExitAnim="@anim/slide_out_to_right"
+            app:popEnterAnim="@anim/slide_in_to_right"
+            />
+    </dialog>
+    <dialog
+        android:id="@+id/optionFragment"
+        android:name="badang.android.taskit.feature_task.presentation.fragment.OptionFragment"
+        android:label="OptionFragment" >
+        <action
+            android:id="@+id/action_optionFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_to_left"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popExitAnim="@anim/slide_out_to_right"
+            app:popEnterAnim="@anim/slide_in_to_right"
+            />
+        <action
+            android:id="@+id/action_optionFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_to_left"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popExitAnim="@anim/slide_out_to_right"
+            app:popEnterAnim="@anim/slide_in_to_right"/>
+        <action
+            android:id="@+id/action_optionFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment"
+            app:enterAnim="@anim/slide_in_to_left"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popExitAnim="@anim/slide_out_to_right"
+            app:popEnterAnim="@anim/slide_in_to_right"
+            />
+    </dialog>
 </navigation>

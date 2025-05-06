@@ -21,10 +21,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import badang.android.taskit.R
+import badang.android.taskit.core.AppHelper
 import badang.android.taskit.databinding.FragmentUpsertBinding
-import badang.android.taskit.feature_task.presentation.TaskEvent
-import badang.android.taskit.feature_task.presentation.TaskState
-import badang.android.taskit.feature_task.presentation.viewmodel.TaskViewModel
+import badang.android.taskit.feature_task.presentation.TaskViewModel
+import badang.android.taskit.feature_task.presentation.other.TaskEvent
+import badang.android.taskit.feature_task.presentation.other.TaskState
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -34,7 +35,6 @@ import kotlinx.coroutines.launch
 
 
 const val EMPTY_ERROR_TAG = "Input is empty!"
-const val SUCCESS_TAG = "Successfully"
 const val DATE_TAG = "TASKIT TIME PICKER"
 const val SNACK_BAR_DURATION = 500
 
@@ -62,6 +62,7 @@ class UpsertFragment : Fragment() {
 
         val viewModel: TaskViewModel by hiltNavGraphViewModels(R.id.nav_graph)
         val onEvent: (TaskEvent)->Unit = viewModel::onEvent
+        val ime = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.tasks.collect { state ->
@@ -72,19 +73,20 @@ class UpsertFragment : Fragment() {
 
         btnNavigateBack = binding.btnNavigateBack
         btnNavigateBack.setOnClickListener {
+            /*Close ime if keyboard is showed*/
+            ime.hideSoftInputFromWindow(it.windowToken, 0)
             it.findNavController().popBackStack()
         }
 
         inputContentLayout = binding.edtContentLayout
         inputContentLayout.setEndIconOnClickListener {
-            showTimerPicker(childFragmentManager, viewModel::onEvent)
+            showTimerPicker(childFragmentManager, viewModel::onEvent) { viewModel.clearTimeState() }
         }
 
         inputContent = binding.edtContent
         inputContent.setHint(taskState.content)
         inputContent.post {
             inputContent.requestFocus()
-            val ime = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             ime.showSoftInput(inputContent, InputMethodManager.SHOW_IMPLICIT)
         }
         inputContent.setOnEditorActionListener { _, actionId, _ ->
@@ -110,7 +112,6 @@ class UpsertFragment : Fragment() {
 
         btnAddToList = binding.btnAddToList
         btnAddToList.setOnClickListener {
-
             onAddTaskListener(
                 view = view,
                 onEvent = onEvent,
@@ -143,16 +144,19 @@ class UpsertFragment : Fragment() {
                 hour = hour,
                 minute = minute,
             ))
-            Snackbar.make(
-                view, SUCCESS_TAG, SNACK_BAR_DURATION
-            ).show()
+            AppHelper.showSnackBar(
+                requireContext(),
+                view,
+                res = R.string.callback_success,
+            )
             findNavController().popBackStack()
         }
     }
 
     private fun showTimerPicker(
         fragmentManager: FragmentManager,
-        onEvent: (TaskEvent) -> Unit
+        onEvent: (TaskEvent) -> Unit,
+        clearState: ()->Unit,
     ){
         val timer = MaterialTimePicker.Builder()
             .setTimeFormat(TimeFormat.CLOCK_24H)
@@ -167,7 +171,7 @@ class UpsertFragment : Fragment() {
             onEvent(TaskEvent.OnAlarmSet(timer.hour, timer.minute))
         }
         timer.addOnNegativeButtonClickListener {
-
+            clearState()
         }
         timer.show(fragmentManager, DATE_TAG)
     }

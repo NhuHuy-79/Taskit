@@ -49,9 +49,16 @@
     <string name="dialog_negative_btn">Cancel</string>
 
 
-    <!--Snack bar - Callback-->
+    <!--Snack bar - Add task-->
     <string name="callback_success">Add task successfully!</string>
     <string name="callback_failed">Add task failed!</string>
+
+    <!--Snack bar - Auth task-->
+    <string name="auth_success">Successfully!</string>
+    <string name="failed_empty_password">Password cannot be empty</string>
+    <string name="failed_empty_email">Email cannot be empty</string>
+    <string name="failed_length_password">Password must contain 8 – 16 characters</string>
+    <string name="failed_invalid_email">Email format is invalid</string>
 
     <!--Timer Picker-->
     <string name="picker_title">Select Time</string>

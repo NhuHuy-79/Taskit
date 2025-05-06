@@ -6,6 +6,8 @@ plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.13"
     id("com.google.gms.google-services")
 
+    id ("kotlin-parcelize")
+
 }
 
 android {
@@ -55,6 +57,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:2.8.0")
     implementation("androidx.navigation:navigation-ui:2.8.0")
 
+    /*Gson*/
+    implementation("com.google.code.gson:gson:2.13.1")
 
     /*Room-Database*/
     implementation("androidx.room:room-runtime:2.6.0")
@@ -90,6 +94,9 @@ dependencies {
 
     //Kotlin coroutine ktx for Firebase
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.9.0")
+
+    //Kotlin - Coroutine with Worker
+    implementation ("androidx.work:work-runtime-ktx:2.8.1")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -4,23 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.navigation.fragment.findNavController
+import badang.android.taskit.R
 import badang.android.taskit.databinding.FragmentSignInBinding
+import badang.android.taskit.feature_auth.presentation.AuthEvent
+import badang.android.taskit.feature_auth.presentation.helper.AuthFragment
+import badang.android.taskit.feature_auth.presentation.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignInFragment : Fragment(){
+class SignInFragment : AuthFragment(){
+
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var emailInput: EditText
-    private lateinit var passwordInput: EditText
-    private lateinit var signInBtn: Button
-    private lateinit var linkToSignUp: TextView
-
+    override val viewModel by hiltNavGraphViewModels<AuthViewModel>(R.id.nav_graph)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,13 +33,57 @@ class SignInFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        emailInput = binding.emailInput
-        passwordInput = binding.passwdInput
-        signInBtn = binding.btnSignIn
-        linkToSignUp = binding.txvLinkToSignUp
+        observeViewModel(
+            view = view,
+            onNavigation = { findNavController().popBackStack() }
+        )
 
+        signInOnListener {
+            val email = binding.emailInput.text.toString()
+            val password = binding.passwordInput.text.toString()
+            viewModel.onEvent(AuthEvent.SignIn(email, password))
+        }
 
+        navigateToSignUp()
+        navigateToDashBoard()
+        navigateToForgotPasswd()
     }
 
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    private fun signInOnListener(
+        onEvent: (AuthEvent)->Unit
+    ){
+
+        binding.btnSignIn.setOnClickListener {
+            val email = binding.emailInput.text.toString().trim()
+            val password = binding.passwordInput.text.toString().trim()
+
+            viewModel.onClear()
+            onEvent(AuthEvent.SignIn(email, password))
+        }
+
+    }
+
+    private fun navigateToSignUp(){
+        binding.txvLinkToSignUp.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+        }
+    }
+
+    private fun navigateToDashBoard(){
+        binding.btnNavigateBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun navigateToForgotPasswd(){
+        binding.txvForgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_sendEmailSheet)
+        }
+    }
 }

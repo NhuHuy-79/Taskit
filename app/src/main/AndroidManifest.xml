@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
     <application
 
-        android:name=".MyApplication"
+        android:name=".TaskitApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -29,16 +32,29 @@
         </activity>
         <activity
             android:name=".ToDoActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
         </activity>
-
+        <activity android:name=".feature_task.HomeActivity"
+            android:exported="true"/>
         <receiver
-            android:name=".feature_task.receiver.AlarmReceiver"
+            android:name=".feature_task.component.receiver.AlarmReceiver"
             android:enabled="true"
            />
-
-        <service android:name=".feature_task.service.ActionService" android:exported="false"
+        <receiver android:name=".feature_task.component.receiver.ActionReceiver"
+            android:enabled="true"
             />
+
+        <service android:name=".feature_task.component.service.TaskService"
+            android:exported="false"
+            />
+
+        <service android:name=".feature_task.component.service.TaskForegroundService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false"
+            />
+
+
     </application>
 
 </manifest>

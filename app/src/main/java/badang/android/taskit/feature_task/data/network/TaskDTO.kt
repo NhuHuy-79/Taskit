@@ -5,7 +5,7 @@ import java.util.UUID
 data class TaskDTO (
     val id: String = UUID.randomUUID().toString(),
     val content: String = "",
-    val time: Long? = null,
+    val timeStamp: Long? = null,
     val isDone: Boolean = false,
-    val isEnabled: Boolean = true
+    val isDeleted: Boolean = false
 )

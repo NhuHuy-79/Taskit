@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:orientation="horizontal"
     android:gravity="end"
+    android:paddingHorizontal="20dp"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -10,6 +11,7 @@
         android:layout_width="31dp"
         android:layout_height="34dp"
         android:src="@drawable/img_add"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         />
 
 </LinearLayout>

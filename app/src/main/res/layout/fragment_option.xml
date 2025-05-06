@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/shape_bottom_sheet"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:src="@drawable/ic_remove"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/txv_dialog_login"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/option_login"
+        android:paddingHorizontal="16dp"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:drawableStartCompat="@drawable/ic_login" />
+
+    <TextView
+        android:id="@+id/txv_dialog_change_password"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:text="@string/option_change_password"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_account" />
+
+    <TextView
+        android:id="@+id/txv_dialog_register"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/option_register"
+        android:paddingHorizontal="16dp"
+        android:drawablePadding="10dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_register" />
+
+    <TextView
+        android:id="@+id/txv_dialog_sign_out"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/option_sign_out"
+        android:paddingHorizontal="16dp"
+        android:drawablePadding="10dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_logout" />
+
+
+    <TextView
+        android:id="@+id/txv_dialog_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:text="@string/option_about_us"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/icon_info" />
+
+</LinearLayout>

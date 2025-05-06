@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="upsert_hint" translatable="false">Enter your task</string>
+    <string name="password_btn_rest_pwd">Reset Password</string>
+    <string name="edt_confirm_input">Confirm password</string>
+    <string name="edt_password_input">Enter password</string>
+    <string name="forgot_pass_edt_email_input">Enter Email</string>
+    <string name="forgot_passwd_btn_send_email">Send Email</string>
+    <string name="option_about_us">About us</string>
+    <string name="option_sign_out">Sign out</string>
+    <string name="option_register">Register</string>
+    <string name="option_change_password">Change Password</string>
+    <string name="option_login">Login</string>
 </resources>

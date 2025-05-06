@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -38,7 +39,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView6"
-        app:srcCompat="@drawable/bg_dashboard" />
+        android:src="@drawable/bg_dashboard"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_avt"
@@ -56,11 +57,11 @@
         app:strokeWidth="1dp" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_marginTop="40dp"
         android:gravity="center_horizontal"
-        app:cardElevation="10dp"
+        app:cardElevation="6dp"
         android:orientation="vertical"
         app:cardCornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +72,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp"
             android:paddingVertical="20dp">
 
             <include

@@ -1,77 +1,116 @@
-/*
 package badang.android.taskit.feature_auth.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import badang.android.taskit.feature_auth.domain.model.User
-import badang.android.taskit.feature_auth.domain.usecase.auth.ResetPasswdUseCase
-import badang.android.taskit.feature_auth.domain.usecase.auth.SendResetEmailUseCase
-import badang.android.taskit.feature_auth.domain.usecase.auth.SignInUseCase
-import badang.android.taskit.feature_auth.domain.usecase.auth.SignOutUseCase
-import badang.android.taskit.feature_auth.domain.usecase.auth.SignUpUseCase
+import badang.android.taskit.feature_auth.domain.model.AuthResult
+import badang.android.taskit.feature_auth.domain.user_case.CheckUserUseCase
+import badang.android.taskit.feature_auth.domain.user_case.LoginUseCase
+import badang.android.taskit.feature_auth.domain.user_case.RegisterUseCase
+import badang.android.taskit.feature_auth.domain.user_case.ResetPasswdUseCase
+import badang.android.taskit.feature_auth.domain.user_case.SendResetEmailUseCase
+import badang.android.taskit.feature_auth.domain.user_case.SignOutUseCase
 import badang.android.taskit.feature_auth.presentation.AuthEvent
 import badang.android.taskit.feature_auth.presentation.AuthState
-import badang.android.taskit.feature_auth.utils.AuthResult
+import badang.android.taskit.feature_auth.presentation.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val signInUseCase: SignInUseCase,
-    private val signUpUseCase: SignUpUseCase,
-    private val signOutUseCase: SignOutUseCase,
+    private val loginUseCase: LoginUseCase,
+    private val registerUseCase: RegisterUseCase,
     private val resetPasswdUseCase: ResetPasswdUseCase,
-    private val sendResetEmail: SendResetEmailUseCase
-) : ViewModel() {
+    private val signOutUseCase: SignOutUseCase,
+    private val sendResetEmailUseCase: SendResetEmailUseCase,
+    private val checkUserUseCase: CheckUserUseCase
+): ViewModel()  {
 
-    private val _authState = MutableStateFlow(AuthState())
+    private val _authState = MutableStateFlow<AuthState>(AuthState.Nothing)
     val authState = _authState.asStateFlow()
 
-    fun onEvent(event: AuthEvent){
-        when (event){
+    val userState = checkUserUseCase().stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = null
+        )
+
+
+    fun onEvent(event: AuthEvent) {
+        when (event) {
             is AuthEvent.ResetPassword -> viewModelScope.launch {
-                val result = resetPasswdUseCase(event.password)
-                updateAuthResult(result)
-            }
-
-            is AuthEvent.SignIn -> viewModelScope.launch {
-                val result = signInUseCase(event.email, event.password)
-                updateAuthResult(result)
-            }
-
-            AuthEvent.SignOut -> viewModelScope.launch {
-                val result = signOutUseCase()
-                updateAuthResult(result)
-            }
-
-            is AuthEvent.SignUp -> viewModelScope.launch{
-                val result = signUpUseCase(event.email, event.name, event.password)
-                updateAuthResult(result)
+                onLoading()
+                val result = resetPasswdUseCase(
+                    passwd = event.password,
+                    confirm = event.confirm
+                )
+                onUpdate(result)
             }
 
             is AuthEvent.SendResetEmail -> viewModelScope.launch {
-                val result = sendResetEmail(event.email)
-                updateAuthResult(result)
+                onLoading()
+                val result = sendResetEmailUseCase(event.email)
+                onUpdate(result)
+            }
+
+            is AuthEvent.SignIn -> viewModelScope.launch {
+                onLoading()
+                val result = loginUseCase(event.email, event.password)
+                onUpdate(result)
+            }
+
+            AuthEvent.SignOut -> viewModelScope.launch{
+                val result = signOutUseCase()
+                onUpdate(result)
+            }
+
+            is AuthEvent.SignUp -> viewModelScope.launch {
+                onLoading()
+                val result = registerUseCase(
+                    email = event.email,
+                    name = event.name,
+                    password = event.password,
+                    confirm = event.confirm
+
+                )
+                onUpdate(result)
             }
         }
     }
 
-    fun getUser(user: User) {
-        _authState.update {
-            it.copy(user = user)
+    private fun onUpdate(result: AuthResult){
+        when (result) {
+            AuthResult.Success -> _authState.value = AuthState.Success
+            is AuthResult.Failure -> {
+                _authState.value = when (result.error) {
+                    AuthResult.Error.UNMATCHED_PASSWORDS -> ErrorState.UnmatchedPasswords
+                    AuthResult.Error.INVALID_EMAIL -> ErrorState.InvalidEmail
+                    AuthResult.Error.WEAK_PASSWORD -> ErrorState.WeakPassword
+                    AuthResult.Error.INVALID_PASSWORD_LENGTH -> ErrorState.InvalidPasswordLength
+                    AuthResult.Error.USER_ALREADY_EXISTS -> ErrorState.UserAlreadyExists
+                    AuthResult.Error.INCORRECT_EMAIL_OR_PASSWORD -> ErrorState.IncorrectEmailOrPassword
+                    AuthResult.Error.UNDEFINED_ERROR -> ErrorState.UndefinedError
+                    AuthResult.Error.EMPTY_INPUT -> ErrorState.EmptyInput
+                    AuthResult.Error.USER_NOT_EXIST -> ErrorState.UserNotExist
+                    AuthResult.Error.NETWORK_ERROR -> ErrorState.NetworkError
+                    AuthResult.Error.TIME_OUT -> ErrorState.TimeOut
+                }
+            }
+
         }
     }
 
-    private fun updateAuthResult(result: AuthResult){
-        _authState.update {
-            it.copy(result = result)
-        }
+    private suspend fun onLoading(){
+        _authState.value = AuthState.Loading
+        delay(2000L)
     }
 
+    fun onClear(){
+       _authState.value = AuthState.Nothing
+    }
 }
-*/

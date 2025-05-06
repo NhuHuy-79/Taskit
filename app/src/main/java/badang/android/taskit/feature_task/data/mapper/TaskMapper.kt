@@ -1,6 +1,6 @@
 package badang.android.taskit.feature_task.data.mapper
 
-import badang.android.taskit.feature_task.data.local.TaskEntity
+import badang.android.taskit.feature_task.data.local.room.TaskEntity
 import badang.android.taskit.feature_task.data.network.TaskDTO
 import badang.android.taskit.feature_task.domain.model.Task
 import java.util.UUID
@@ -13,7 +13,7 @@ class TaskMapper {
             content = this.content,
             time = this.time,
             isDone = this.isDone,
-            isAlarmed = this.isEnabled,
+            isEnabled = this.isAlarmed,
         )
 
         fun Task.toEntity() = TaskEntity(
@@ -21,16 +21,22 @@ class TaskMapper {
             content = this.content,
             time = this.time,
             isDone = this.isDone,
-            isEnabled = this.isAlarmed,
+            isAlarmed = this.isEnabled,
             isSynced = false
         )
 
-        fun Task.toNetWork(): TaskDTO = TaskDTO(
+
+        fun TaskEntity.toNetWork(): TaskDTO = TaskDTO(
             id = this.id ?: "",
             content = this.content,
             isDone =  this.isDone,
-            time = this.time,
-            isEnabled = this.isAlarmed
+            timeStamp = this.time
+        )
+
+        fun TaskEntity.toHashMap() = mapOf(
+            "content" to this.content,
+            "isDone" to this.isDone,
+            "timeStamp" to this.time
         )
     }
 }

@@ -4,42 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import badang.android.taskit.R
-import badang.android.taskit.common.UiHelper
 import badang.android.taskit.databinding.FragmentSignUpBinding
 import badang.android.taskit.feature_auth.presentation.AuthEvent
-import badang.android.taskit.feature_auth.presentation.AuthState
-import badang.android.taskit.feature_auth.utils.AuthResult
-import badang.android.taskit.feature_auth.utils.showUiSnackBar
-import com.google.firebase.auth.FirebaseAuth
+import badang.android.taskit.feature_auth.presentation.helper.AuthFragment
+import badang.android.taskit.feature_auth.presentation.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SignUpFragment: Fragment() {
+class SignUpFragment: AuthFragment() {
+
     private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var emailInput: EditText
-    private lateinit var nameInput: EditText
-    private lateinit var passwordInput: EditText
-    private lateinit var confirmInput: EditText
-
-    private lateinit var signUpBtn: Button
-    private lateinit var linkToSignIn: TextView
-
-    private lateinit var auth: FirebaseAuth
-    private lateinit var onEvent: (AuthEvent) -> Unit
-    private lateinit var authState: AuthState
+    override val viewModel by hiltNavGraphViewModels<AuthViewModel>(R.id.nav_graph)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,35 +33,38 @@ class SignUpFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeViewModel(view) { findNavController().popBackStack() }
+        signUpOnListener()
+        linkToSignIn()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 
 
-        emailInput = binding.edtEmail
-        nameInput = binding.edtFullName
-        passwordInput = binding.edtPassword
-        confirmInput = binding.edtConfirmPassword
-        signUpBtn = binding.btnSignUp
-        linkToSignIn = binding.txvLinkToSignIn
-        auth = FirebaseAuth.getInstance()
+    private fun signUpOnListener() {
 
+        binding.btnSignUp.setOnClickListener {
+            val email = binding.edtEmail.text.toString()
+            val password = binding.edtPassword.text.toString().trim()
+            val name = binding.edtFullName.text.toString()
+            val confirm = binding.edtConfirmPassword.text.toString().trim()
 
-        linkToSignIn.setOnClickListener { navigateToSignIn(it) }
-
-        signUpBtn.setOnClickListener {
-            val email = emailInput.text.toString()
-            val passwd = passwordInput.text.toString()
-            val confirm = confirmInput.text.toString()
-
-            if (passwd != confirm) {
-                UiHelper.showToast(requireContext(), 0)
-                return@setOnClickListener
-            }
-            onEvent(AuthEvent.SignIn(email, passwd))
+            viewModel.onEvent(AuthEvent.SignUp(email, password, name, confirm))
         }
-
     }
 
-    private fun navigateToSignIn(view: View){
-        view.findNavController().popBackStack()
+    private fun linkToSignIn(){
+        binding.btnNavigateBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.txvLinkToSignIn.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
+
 
 }

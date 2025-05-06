@@ -4,13 +4,13 @@
     android:orientation="vertical"
     android:background="@drawable/shape_bottom_sheet"
     android:layout_width="match_parent"
-    android:paddingHorizontal="16dp"
     android:paddingVertical="10dp"
     android:layout_height="wrap_content">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
         android:src="@drawable/ic_remove"
         android:layout_gravity="center_horizontal" />
 
@@ -20,9 +20,11 @@
         android:layout_height="45dp"
         android:gravity="center_vertical"
         android:text="@string/modal_edit"
+        android:paddingHorizontal="16dp"
         android:drawablePadding="10dp"
         android:fontFamily="@font/poppins_regular"
         android:textSize="14sp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         app:drawableStartCompat="@drawable/ic_modal_edit" />
 
     <TextView
@@ -30,7 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
         android:text="@string/modal_complete_task"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:drawablePadding="10dp"
         android:fontFamily="@font/poppins_regular"
         android:textSize="14sp"
@@ -42,7 +46,9 @@
         android:layout_height="45dp"
         android:gravity="center_vertical"
         android:text="@string/modal_set_alarm"
+        android:paddingHorizontal="16dp"
         android:drawablePadding="10dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:fontFamily="@font/poppins_regular"
         android:textSize="14sp"
         app:drawableStartCompat="@drawable/ic_modal_alarm" />
@@ -53,7 +59,9 @@
         android:layout_height="45dp"
         android:gravity="center_vertical"
         android:text="@string/modal_delete_task"
+        android:paddingHorizontal="16dp"
         android:drawablePadding="10dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:fontFamily="@font/poppins_regular"
         android:textSize="14sp"
         app:drawableStartCompat="@drawable/ic_modal_delete" />
@@ -64,7 +72,9 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
         android:text="@string/modal_delete_all"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:drawablePadding="10dp"
         android:fontFamily="@font/poppins_regular"
         android:textSize="14sp"
